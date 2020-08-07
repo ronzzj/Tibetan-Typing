@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!--Bootstrap Start -->
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--Bootstrap End -->
+
+    <!--- Development Version Of Vue.js-->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+
+    <!--- Production Version Of Vue.js-->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!--- Local Css Style -->
+
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!--- Title -->
+    <title>Tibetan Typing</title>
+
+    <!--- Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- Contianer Start -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <!---Navgation Bar Start -->
+                    <nav class="navbar navbar-light bg-light">
+                        <a class="navbar-brand">
+                            <h3>Tibetan Typing</h3>
+                        </a>
+                        <form class="form-inline">
+                            <!--- Reset Button -->
+                            <button type="button" class="btn btn-danger pull-right" v-on:click="reset">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
+                              <path fill-rule="evenodd" d="M8.147.146a.5.5 0 0 1 .707 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 1 1-.707-.708L10.293 3 8.147.854a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                          </button>
+                        </form>
+                    </nav>
+                    <!--- Navgation Bar End -->
+                    </br>
+                    <!--- Result Alert Component Start -->
+                    <div v-if="visable" class="alert alert-success alert-dismissible fade show" role="alert" style="font-family: NotoSansTibetan-Regular;">
+                        <strong>སྐར་གྲངས།&nbsp;<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                            <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                          </svg>&nbsp;{{res.score}}&nbsp;&nbsp;
+                          ཡང་དག་ཚད།&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                          </svg>&nbsp;{{res.accuracy}}%&nbsp;&nbsp; 
+                          དུས་ཚོད།&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A6 6 0 1 0 8 3a6 6 0 0 0 0 12zm0 1A7 7 0 1 0 8 2a7 7 0 0 0 0 14z"/>
+                            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.053.224l-1.5 3a.5.5 0 1 1-.894-.448L7.5 8.882V5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+                            <path fill-rule="evenodd" d="M11.646 14.146a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1-.708.708l-1-1a.5.5 0 0 1 0-.708zm-7.292 0a.5.5 0 0 0-.708 0l-1 1a.5.5 0 0 0 .708.708l1-1a.5.5 0 0 0 0-.708zM5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M7 1h2v2H7V1z"/>
+                          </svg><span id="txt">&nbsp;{{res.time}}</span></strong>
+                        <button type="button" class="close" data-dismiss="alert" v-on:click="visable=false">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--- Result Alert Component Start End -->
+
+                    <!--- Content Area Start -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 v-html='current' class="content"></h3>
+                            <button type="button" class="btn btn-primary" v-if="!isBegain" v-on:click="start" style="margin: 0px auto;display: table;">
+                                  START
+                                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                                    <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                                  </svg>
+                            </button>
+                            <div>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                            <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                          </svg> &nbsp; {{score}}&nbsp;
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                          </svg> &nbsp; {{accuracy}}%&nbsp;
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A6 6 0 1 0 8 3a6 6 0 0 0 0 12zm0 1A7 7 0 1 0 8 2a7 7 0 0 0 0 14z"/>
+                            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.053.224l-1.5 3a.5.5 0 1 1-.894-.448L7.5 8.882V5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+                            <path fill-rule="evenodd" d="M11.646 14.146a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1-.708.708l-1-1a.5.5 0 0 1 0-.708zm-7.292 0a.5.5 0 0 0-.708 0l-1 1a.5.5 0 0 0 .708.708l1-1a.5.5 0 0 0 0-.708zM5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M7 1h2v2H7V1z"/>
+                          </svg>&nbsp;<span id="txt">00:00:00</span>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Content Area End -->
+                    <br />
+                    <!-- Keyboard Start -->
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="keyboard">
+                                <div class="line">
+                                    <button id="key_10" type="button" class="btn btn-default btn-lg btn1">ཨ</button>
+                                    <button id="key_1" type="button" class="btn btn-default btn-lg btn1">༡</button>
+                                    <button id="key_2" type="button" class="btn btn-default btn-lg btn1">༢</button>
+                                    <button id="key_3" type="button" class="btn btn-default btn-lg btn1">༣</button>
+                                    <button id="key_4" type="button" class="btn btn-default btn-lg btn1">༤</button>
+                                    <button id="key_5" type="button" class="btn btn-default btn-lg btn1">༥</button>
+                                    <button id="key_6" type="button" class="btn btn-default btn-lg btn1">༦</button>
+                                    <button id="key_7" type="button" class="btn btn-default btn-lg btn1">༧</button>
+                                    <button id="key_8" type="button" class="btn btn-default btn-lg btn1">༨</button>
+                                    <button id="key_9" type="button" class="btn btn-default btn-lg btn1">༩</button>
+                                    <button id="key_0" type="button" class="btn btn-default btn-lg btn1">༠</button>
+                                    <button id="key_11" type="button" class="btn btn-default btn-lg btn1">ཧ</button>
+                                    <button id="key_12" type="button" class="btn btn-default btn-lg btn1">ཝ</button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 dele">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-backspace" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.603 2h7.08a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-7.08a1 1 0 0 1-.76-.35L1 8l4.844-5.65A1 1 0 0 1 6.603 2zm7.08-1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08z"/>
+                                        <path fill-rule="evenodd" d="M5.83 5.146a.5.5 0 0 0 0 .708l5 5a.5.5 0 0 0 .707-.708l-5-5a.5.5 0 0 0-.708 0z"/>
+                                        <path fill-rule="evenodd" d="M11.537 5.146a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708-.708l5-5a.5.5 0 0 1 .707 0z"/>
+                                      </svg>
+                                  </button>
+                                </div>
+                                <div class="line">
+                                    <button type="button" class="btn btn-default btn-lg btn1 tab">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z"/>
+                                        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/>
+                                      </svg>
+                                    </button>
+                                    <button id="key_q" type="button" class="btn btn-default btn-lg btn1">ཅ</button>
+                                    <button id="key_w" type="button" class="btn btn-default btn-lg btn1">ཆ</button>
+                                    <button id="key_e" type="button" class="btn btn-default btn-lg btn1">ེ</button>
+                                    <button id="key_r" type="button" class="btn btn-default btn-lg btn1">ར</button>
+                                    <button id="key_t" type="button" class="btn btn-default btn-lg btn1">ཏ</button>
+                                    <button id="key_y" type="button" class="btn btn-default btn-lg btn1">ཡ</button>
+                                    <button id="key_u" type="button" class="btn btn-default btn-lg btn1">ུ</button>
+                                    <button id="key_i" type="button" class="btn btn-default btn-lg btn1">ི</button>
+                                    <button id="key_o" type="button" class="btn btn-default btn-lg btn1">ོ</button>
+                                    <button id="key_p" type="button" class="btn btn-default btn-lg btn1">ཕ</button>
+                                    <button id="key_13" type="button" class="btn btn-default btn-lg btn1">ཙ</button>
+                                    <button id="key_14" type="button" class="btn btn-default btn-lg btn1">ཚ</button>
+                                    <button id="key_15" type="button" class="btn btn-default btn-lg btn1">ཛ</button>
+                                </div>
+                                <div class="line">
+                                    <button type="button" class="btn btn-default btn-lg btn1 caps">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-app-indicator" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                                        <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                      </svg>
+                                    </button>
+                                    <button id="key_a" type="button" class="btn btn-default btn-lg btn1">འ</button>
+                                    <button id="key_s" type="button" class="btn btn-default btn-lg btn1">ས</button>
+                                    <button id="key_d" type="button" class="btn btn-default btn-lg btn1">ད</button>
+                                    <button id="key_f" type="button" class="btn btn-default btn-lg btn1">བ</button>
+                                    <button id="key_g" type="button" class="btn btn-default btn-lg btn1">ང</button>
+                                    <button id="key_h" type="button" class="btn btn-default btn-lg btn1">མ</button>
+                                    <button id="key_j" type="button" class="btn btn-default btn-lg btn1">་</button>
+                                    <button id="key_k" type="button" class="btn btn-default btn-lg btn1">ག</button>
+                                    <button id="key_l" type="button" class="btn btn-default btn-lg btn1">ལ</button>
+                                    <button id="key_16" type="button" class="btn btn-default btn-lg btn1">ཞ</button>
+                                    <button id="key_17" type="button" class="btn btn-default btn-lg btn1">།</button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 enter">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M5.854 5.646a.5.5 0 0 1 0 .708L3.207 9l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M13.5 2.5a.5.5 0 0 1 .5.5v4a2.5 2.5 0 0 1-2.5 2.5H3a.5.5 0 0 1 0-1h8.5A1.5 1.5 0 0 0 13 7V3a.5.5 0 0 1 .5-.5z"/>
+                                      </svg>
+                                    </button>
+                                </div>
+                                <div class="line">
+                                    <button type="button" class="btn btn-default btn-lg btn1 shift">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M11.354 5.854a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L8 3.207l2.646 2.647a.5.5 0 0 0 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-1 0v6.5a.5.5 0 0 0 .5.5zm-4.8 1.6c0-.22.18-.4.4-.4h8.8a.4.4 0 0 1 0 .8H3.6a.4.4 0 0 1-.4-.4z"/>
+                                      </svg>
+                                    </button>
+                                    <button id="key_z" type="button" class="btn btn-default btn-lg btn1">ཟ</button>
+                                    <button id="key_x" type="button" class="btn btn-default btn-lg btn1">ཤ</button>
+                                    <button id="key_c" type="button" class="btn btn-default btn-lg btn1">ཀ</button>
+                                    <button id="key_v" type="button" class="btn btn-default btn-lg btn1">ཁ</button>
+                                    <button id="key_b" type="button" class="btn btn-default btn-lg btn1">པ</button>
+                                    <button id="key_n" type="button" class="btn btn-default btn-lg btn1">ན</button>
+                                    <button id="key_m" type="button" class="btn btn-default btn-lg btn1">m</button>
+                                    <button id="key_18" type="button" class="btn btn-default btn-lg btn1">ཐ</button>
+                                    <button id="key_19" type="button" class="btn btn-default btn-lg btn1">ཇ</button>
+                                    <button id="key_20" type="button" class="btn btn-default btn-lg btn1">ཉ</button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 shift">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M11.354 5.854a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L8 3.207l2.646 2.647a.5.5 0 0 0 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-1 0v6.5a.5.5 0 0 0 .5.5zm-4.8 1.6c0-.22.18-.4.4-.4h8.8a.4.4 0 0 1 0 .8H3.6a.4.4 0 0 1-.4-.4z"/>
+                                      </svg>
+                                    </button>
+                                </div>
+                                <div class="line">
+                                    <button type="button" class="btn btn-default btn-lg btn1">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                      </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M1 13.5a.5.5 0 0 0 .5.5h3.797a.5.5 0 0 0 .439-.26L11 3h3.5a.5.5 0 0 0 0-1h-3.797a.5.5 0 0 0-.439.26L5 13H1.5a.5.5 0 0 0-.5.5zm10 0a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5z"/>
+                                      </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 cmd">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-command" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 0 3.5 5H5V3.5a1.5 1.5 0 1 0-3 0zM6 6V3.5A2.5 2.5 0 1 0 3.5 6H6zm8-2.5A1.5 1.5 0 0 1 12.5 5H11V3.5a1.5 1.5 0 0 1 3 0zM10 6V3.5A2.5 2.5 0 1 1 12.5 6H10zm-8 6.5A1.5 1.5 0 0 1 3.5 11H5v1.5a1.5 1.5 0 0 1-3 0zM6 10v2.5A2.5 2.5 0 1 1 3.5 10H6zm8 2.5a1.5 1.5 0 0 0-1.5-1.5H11v1.5a1.5 1.5 0 0 0 3 0zM10 10v2.5a2.5 2.5 0 1 0 2.5-2.5H10z"/>
+                                        <path fill-rule="evenodd" d="M10 6H6v4h4V6zM5 5v6h6V5H5z"/>
+                                      </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 space">
+                                      &nbsp; 
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1 cmd">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-command" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 0 3.5 5H5V3.5a1.5 1.5 0 1 0-3 0zM6 6V3.5A2.5 2.5 0 1 0 3.5 6H6zm8-2.5A1.5 1.5 0 0 1 12.5 5H11V3.5a1.5 1.5 0 0 1 3 0zM10 6V3.5A2.5 2.5 0 1 1 12.5 6H10zm-8 6.5A1.5 1.5 0 0 1 3.5 11H5v1.5a1.5 1.5 0 0 1-3 0zM6 10v2.5A2.5 2.5 0 1 1 3.5 10H6zm8 2.5a1.5 1.5 0 0 0-1.5-1.5H11v1.5a1.5 1.5 0 0 0 3 0zM10 10v2.5a2.5 2.5 0 1 0 2.5-2.5H10z"/>
+                                        <path fill-rule="evenodd" d="M10 6H6v4h4V6zM5 5v6h6V5H5z"/>
+                                      </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M1 13.5a.5.5 0 0 0 .5.5h3.797a.5.5 0 0 0 .439-.26L11 3h3.5a.5.5 0 0 0 0-1h-3.797a.5.5 0 0 0-.439.26L5 13H1.5a.5.5 0 0 0-.5.5zm10 0a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5z"/>
+                                      </svg>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-lg btn1">
+                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                      </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Keyboard End -->
+                </div>
+            </div>
+        </div>
+        <!-- Contianer End -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                /* Contorl Results Visable */
+                visable: false,
+                /* Player Reuslts */
+                res: {
+                    accuracy: 0,
+                    score: 0,
+                    time: '00:00:00',
+                },
+                /* Temp Avriable For Content */
+                temp: '',
+                accuracy: 100,
+                timer: '',
+                // 文字区域内容
+                content: '',
+                // 分数
+                score: 0,
+                // 是否开始
+                isBegain: false,
+                index: 0,
+                current: '',
+                index1: '',
+                keys: [{
+                    keycode: '48',
+                    key: '0',
+                    value: '༠',
+                    id: 'key_0',
+                    status: false
+                }, {
+                    keycode: '49',
+                    key: '1',
+                    value: '༡',
+                    id: 'key_1',
+                    status: false
+                }, {
+                    keycode: '50',
+                    key: '2',
+                    value: '༢',
+                    id: 'key_2',
+                    status: false
+                }, {
+                    keycode: '51',
+                    key: '3',
+                    value: '༣',
+                    id: 'key_3',
+                    status: false
+                }, {
+                    keycode: '52',
+                    key: '4',
+                    value: '༤',
+                    id: 'key_4',
+                    status: false
+                }, {
+                    keycode: '53',
+                    key: '5',
+                    value: '༥',
+                    id: 'key_5',
+                    status: false
+                }, {
+                    keycode: '54',
+                    key: '6',
+                    value: '༦',
+                    id: 'key_6',
+                    status: false
+                }, {
+                    keycode: '55',
+                    key: '7',
+                    value: '༧',
+                    id: 'key_7',
+                    status: false
+                }, {
+                    keycode: '56',
+                    key: '8',
+                    value: '༨',
+                    id: 'key_8',
+                    status: false
+                }, {
+                    keycode: '57',
+                    key: '9',
+                    value: '༩',
+                    id: 'key_9',
+                    status: false
+                }, {
+                    keycode: '65',
+                    key: 'a',
+                    value: 'འ',
+                    id: 'key_a',
+                    status: false
+                }, {
+                    keycode: '66',
+                    key: 'b',
+                    value: 'པ',
+                    id: 'key_b',
+                    status: false
+                }, {
+                    keycode: '67',
+                    key: 'c',
+                    value: 'ཀ',
+                    id: 'key_c',
+                    status: false
+                }, {
+                    keycode: '68',
+                    key: 'd',
+                    value: 'ད',
+                    id: 'key_d',
+                    status: false
+                }, {
+                    keycode: '69',
+                    key: 'e',
+                    value: ' ེ',
+                    id: 'key_e',
+                    status: false
+                }, {
+                    keycode: '70',
+                    key: 'f',
+                    value: 'བ',
+                    id: 'key_f',
+                    status: false
+                }, {
+                    keycode: '71',
+                    key: 'g',
+                    value: 'ང',
+                    id: 'key_g',
+                    status: false
+                }, {
+                    keycode: '72',
+                    key: 'h',
+                    value: 'མ',
+                    id: 'key_h',
+                    status: false
+                }, {
+                    keycode: '73',
+                    key: 'i',
+                    value: ' ི',
+                    id: 'key_i',
+                    status: false
+                }, {
+                    keycode: '74',
+                    key: 'j',
+                    value: '་',
+                    id: 'key_j',
+                    status: false
+                }, {
+                    keycode: '75',
+                    key: 'k',
+                    value: 'ག',
+                    id: 'key_k',
+                    status: false
+                }, {
+                    keycode: '76',
+                    key: 'l',
+                    value: 'ལ',
+                    id: 'key_l',
+                    status: false
+                }, {
+                    keycode: '77',
+                    key: 'm',
+                    value: '',
+                    id: 'key_m',
+                    status: false
+                }, {
+                    keycode: '78',
+                    key: 'n',
+                    value: 'ན',
+                    id: 'key_n',
+                    status: false
+                }, {
+                    keycode: '79',
+                    key: 'o',
+                    value: ' ོ',
+                    id: 'key_o',
+                    status: false
+                }, {
+                    keycode: '80',
+                    key: 'p',
+                    value: 'ཕ',
+                    id: 'key_p',
+                    status: false
+                }, {
+                    keycode: '81',
+                    key: 'q',
+                    value: 'ཅ',
+                    id: 'key_q',
+                    status: false
+                }, {
+                    keycode: '82',
+                    key: 'r',
+                    value: 'ར',
+                    id: 'key_r',
+                    status: false
+                }, {
+                    keycode: '83',
+                    key: 's',
+                    value: 'ས',
+                    id: 'key_s',
+                    status: false
+                }, {
+                    keycode: '84',
+                    key: 't',
+                    value: 'ཏ',
+                    id: 'key_t',
+                    status: false
+                }, {
+                    keycode: '85',
+                    key: 'u',
+                    value: ' ུ',
+                    id: 'key_u',
+                    status: false
+                }, {
+                    keycode: '86',
+                    key: 'v',
+                    value: 'ཁ',
+                    id: 'key_v',
+                    status: false
+                }, {
+                    keycode: '87',
+                    key: 'w',
+                    value: 'ཆ',
+                    id: 'key_w',
+                    status: false
+                }, {
+                    keycode: '88',
+                    key: 'x',
+                    value: 'ཤ',
+                    id: 'key_x',
+                    status: false
+                }, {
+                    keycode: '89',
+                    key: 'y',
+                    value: 'ཡ',
+                    id: 'key_y',
+                    status: false
+                }, {
+                    keycode: '90',
+                    key: 'z',
+                    value: 'ཟ',
+                    id: 'key_z',
+                    status: false
+                }, {
+                    keycode: '192',
+                    key: '~',
+                    value: 'ཨ',
+                    id: 'key_10',
+                    status: false
+                }, {
+                    keycode: '189',
+                    key: '-',
+                    value: 'ཧ',
+                    id: 'key_11',
+                    status: false
+                }, {
+                    keycode: '187',
+                    key: '+',
+                    value: 'ཝ',
+                    id: 'key_12',
+                    status: false
+                }, {
+                    keycode: '219',
+                    key: '[',
+                    value: 'ཙ',
+                    id: 'key_13',
+                    status: false
+                }, , {
+                    keycode: '221',
+                    key: ']',
+                    value: 'ཚ',
+                    id: 'key_14',
+                    status: false
+                }, {
+                    keycode: '220',
+                    key: '\\',
+                    value: 'ཛ',
+                    id: 'key_15',
+                    status: false
+                }, {
+                    keycode: '186',
+                    key: ';',
+                    value: 'ཞ',
+                    id: 'key_16',
+                    status: false
+                }, {
+                    keycode: '222',
+                    key: '\'',
+                    value: '།',
+                    id: 'key_17',
+                    status: false
+                }, {
+                    keycode: '188',
+                    key: ',',
+                    value: 'ཐ',
+                    id: 'key_18',
+                    status: false
+                }, {
+                    keycode: '190',
+                    key: '.',
+                    value: 'ཇ',
+                    id: 'key_19',
+                    status: false
+                }, {
+                    keycode: '191',
+                    key: '/',
+                    value: 'ཉ',
+                    id: 'key_20',
+                    status: false
+                }]
+            },
+            created() {
+                let that = this;
+                document.onkeydown = function(event) {
+                    var e = event || window.event || arguments.callee.caller.arguments[0];
+                    /* If Typing Not Finished */
+                    if (that.isBegain && that.index < that.content.length) {
+                        let flage = true;
+                        /* Reset Kyes Style */
+                        document.getElementById(that.keys[that.index1].id).style.color = "black";
+                        document.getElementById(that.keys[that.index1].id).style.background = "white";
+                        for (i in that.keys) {
+                            /* If Type Correct */
+                            if (e && e.keyCode == that.keys[i].keycode && that.content.charAt(that.index) == that.keys[i].value) {
+                                that.score += 10;
+                                that.temp += '<span class="correct">' + that.content.charAt(that.index) + '</span>';
+                                that.current = that.temp;
+                                flage = false;
+                            }
+                        }
+                        /* If Type Worng */
+                        if (flage) {
+                            that.temp += '<span class="wrong">' + that.content.charAt(that.index) + '</span>';
+                            that.current = that.temp;
+                            that.accuracy -= (1 / that.content.length) * 100;
+                            that.accuracy = Math.round(that.accuracy * 10) / 10;
+                        }
+                        that.index++;
+                        if (that.index < that.content.length) {
+                            that.render();
+                        }
+                        /* Typing Finished */
+                    } else if (that.isBegain && that.index == that.content.length) {
+                        console.log(that.score)
+                        that.res.score = that.score;
+                        that.res.accuracy = that.accuracy;
+                        that.visable = true;
+                        console.log(this.timer)
+                        that.reset();
+                    }
+                }
+            },
+            methods: {
+                /* Start Game */
+                start() {
+                    if (!this.isBegain) {
+                        this.visable = false;
+                        /* Random Generate String */
+                        this.content = this.randomString(30);
+                        /* Set Game Started */
+                        this.isBegain = true;
+                        /* Render Content */
+                        this.render();
+                        /* Timer */
+                        this.count();
+                    }
+                },
+                /* Reset */
+                reset() {
+                    document.getElementById(this.keys[this.index1].id).style.color = "black";
+                    document.getElementById(this.keys[this.index1].id).style.background = "white";
+                    this.content = '';
+                    this.isBegain = false;
+                    this.score = 0;
+                    this.temp = '';
+                    this.index = 0;
+                    this.index1 = '';
+                    this.current = '';
+                    this.accuracy = 100;
+                    clearInterval(this.timer);
+                    txt.innerHTML = '00:00:00';
+                },
+                /* Render */
+                render() {
+                    this.current += '<span style="color:#84A9FF">' + this.content.charAt(this.index) + '</span>' + this.content.substring(this.index + 1, this.content.length);
+                    for (i in this.keys) {
+                        if (this.content.charAt(this.index) == this.keys[i].value) {
+                            this.index1 = i;
+                            /* Set Kyes Style */
+                            document.getElementById(this.keys[i].id).style.color = "white";
+                            document.getElementById(this.keys[i].id).style.background = "#84A9FF";
+                        }
+                    }
+                },
+                /* Generate Random String*/
+                randomString(len) {　　
+                    len = len || 32;　　
+                    var $chars = '༠༡༢༣༤༥༦༧༨༩ཀཁགངཅཆཇཉདཐཏནཔཕབམཙཚཛཝཞཟའཡརལཤསཧཨ';　　
+                    var maxPos = $chars.length;　　
+                    var res = '';　　
+                    for (i = 0; i < len; i++) {　　　　
+                        res += $chars.charAt(Math.floor(Math.random() * maxPos));
+                        res += '་';　　
+                    }
+                    res += '།';　　
+                    return res;
+                },
+                /* Timer */
+                count() {
+                    var count = 0;
+                    let that = this;
+                    var txt = document.getElementById('txt');
+                    this.timer = setInterval(function() {
+                        var h = parseInt(count / 1000 / 60 / 60);
+                        var m = parseInt(count / 1000 / 60) % 60;
+                        var s = parseInt(count / 1000) % 60;
+                        var ms = parseInt(count / 10) % 100;
+                        h = h < 10 ? '0' + h : h;
+                        m = m < 10 ? '0' + m : m;
+                        s = s < 10 ? '0' + s : s;
+                        ms = ms < 10 ? '0' + ms : ms;
+                        txt.innerHTML = m + ':' + s + ':' + ms;
+                        that.res.time = m + ':' + s + ':' + ms;
+                        count += 10;
+                    }, 10)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

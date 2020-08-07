@@ -1,0 +1,111 @@
+/* Tab */
+
+.tab {
+    width: 80px;
+}
+
+
+/* Delete */
+
+.dele {
+    width: 90px;
+}
+
+
+/* Caps Lock */
+
+.caps {
+    width: 85px;
+}
+
+
+/* Enter */
+
+.enter {
+    width: 100px;
+}
+
+
+/* Shift */
+
+.shift {
+    width: 110px;
+}
+
+
+/* Space */
+
+.space {
+    width: 375px;
+}
+
+
+/* Command */
+
+.cmd {
+    width: 60px;
+}
+
+
+/* Keys Style */
+
+.btn1 {
+    border-color: black;
+}
+
+
+/* The Keyboard */
+
+.keyboard {
+    font-family: NotoSansTibetan-Regular;
+}
+
+
+/* One Line Of Keys */
+
+.line {
+    margin-top: 5px;
+}
+
+
+/* Correct Letter */
+
+.correct {
+    margin-left: 3px;
+    border-radius: 4px;
+    text-align: center;
+    background: #EAFBA1;
+}
+
+
+/* Wrong Letter */
+
+.wrong {
+    margin-left: 3px;
+    width: 20px;
+    border-radius: 4px;
+    text-align: center;
+    background: #FFC7B4;
+}
+
+.content {
+    font-family: NotoSansTibetan-Regular;
+    letter-spacing: 10px;
+    line-height: 70px
+}
+
+
+/* Tibetan Font Regular */
+
+@font-face {
+    font-family: NotoSansTibetan-Regular;
+    src: url('../fonts/NotoSansTibetan-Regular.ttf') format('truetype')
+}
+
+
+/* Tibetan Font Bold */
+
+@font-face {
+    font-family: NotoSansTibetan-Bold;
+    src: url('../fonts/NotoSansTibetan-Bold.ttf') format('truetype')
+}
