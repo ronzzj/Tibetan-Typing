@@ -6,3 +6,5 @@
 
 ##### **THE WEB SITE IS MADE BY  HTML + CSS + Vue.js + Bootstrap;**
 
+**URL:** https://ronzzj.github.io/Tibetan-Typing/
+
